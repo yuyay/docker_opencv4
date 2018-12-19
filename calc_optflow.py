@@ -28,8 +28,8 @@ def flow_to_img(raw_flow, bound):
 
 
 def process_one(prevfile, nextfile, bound):
-    xout = nextfile.replace("rgb_", "flowx_")
-    yout = nextfile.replace("rgb_", "flowy_")
+    xout = nextfile.replace("edge_", "edgeflowx_")
+    yout = nextfile.replace("edge_", "edgeflowy_")
 
     im1 = read_and_preprocess_image(prevfile)
     im2 = read_and_preprocess_image(nextfile)
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     for dn in tqdm.tqdm(os.listdir(args.root)):
-        files = glob.glob(os.path.join(args.root, dn, "rgb_*.jpg"))
+        files = glob.glob(os.path.join(args.root, dn, "edge_*.jpg"))
         files = sorted(files)
 
         r = Parallel(n_jobs=args.n_jobs)([
